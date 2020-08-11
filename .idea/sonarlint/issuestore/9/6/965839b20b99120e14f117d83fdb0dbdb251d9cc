@@ -1,0 +1,6 @@
+
+gsquid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(À³ËŞüÿÿÿÿ8Åúö…š.
+bsquid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(…Ó’õ8Åúö…š.
+bsquid:S2184"FCast one of the operands of this multiplication operation to a "long".(§ÓãÜ8Åúö…š.
+Dsquid:S1148"#Use a logger to log this exception.(ÍÀ¹îûÿÿÿÿ8Åúö…š.
+_squid:S2276"CReplace the call to "Thread.sleep(...)" with a call to "wait(...)".(§ÓãÜ8Åúö…š.

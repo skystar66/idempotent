@@ -1,0 +1,7 @@
+
+Usquid:S2274";Remove this call to "await" or move it into a "while" loop.(Òùá‡üÿÿÿÿ
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ8ßý÷…š.
+Osquid:S3077".Remove the "volatile" keyword from this field.(ð‘©Òûÿÿÿÿ8ßý÷…š.
+bsquid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€8ßý÷…š.
+Z
+squid:S899":Do something with the "boolean" value returned by "await".(Òùá‡üÿÿÿÿ8ßý÷…š.

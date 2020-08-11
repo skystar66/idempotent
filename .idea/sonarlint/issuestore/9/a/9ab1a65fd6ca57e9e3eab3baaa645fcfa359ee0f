@@ -1,0 +1,11 @@
+
+=squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+osquid:S3008"ZRename this field "usdt_seq_prefix" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Á©Ì™
+isquid:S3008"TRename this field "admin_seq" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ù›Î
+hsquid:S3008"SRename this field "usdt_seq" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶ÙàÃ
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Úô¾¶
+gsquid:S3008"RRename this field "mix_seq" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(……À­
+Gsquid:S1135"2Complete the task associated to this TODO comment.(õúä
+`squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ƒ¡Õ”
+usquid:S3008"[Rename this field "admin_seq_prefix" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬‰½‘øÿÿÿÿ
+nsquid:S3008"YRename this field "mix_seq_prefix" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İÄà·

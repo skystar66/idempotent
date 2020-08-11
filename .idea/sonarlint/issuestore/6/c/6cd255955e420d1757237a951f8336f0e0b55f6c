@@ -1,0 +1,11 @@
+
+Csquid:S1444".Make this "public static SUB_MALL" field final(êæ³
+Dsquid:S1444"/Make this "public static SUB_ORDER" field final(ÿ×¶¤
+"squid:ClassVariableVisibilityCheck"UMake SUB_ORDER a static final constant or non-public and provide accessors if needed.(ÿ×¶¤
+hsquid:S3008"SRename this field "SUB_MALL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(êæ³
+gsquid:S3008"RRename this field "SUB_MSG" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ç¯ëÎ
+€"squid:ClassVariableVisibilityCheck"TMake SUB_MALL a static final constant or non-public and provide accessors if needed.(êæ³
+Osquid:S1118":Add a private constructor to hide the implicit public one.(êáßô
+isquid:S3008"TRename this field "SUB_ORDER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÿ×¶¤
+"squid:ClassVariableVisibilityCheck"SMake SUB_MSG a static final constant or non-public and provide accessors if needed.(Ç¯ëÎ
+Bsquid:S1444"-Make this "public static SUB_MSG" field final(Ç¯ëÎ

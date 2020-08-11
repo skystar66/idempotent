@@ -1,0 +1,5 @@
+
+:squid:S1181"%Catch Exception instead of Throwable.(¬œ¹
+\squid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(ƒŞ¢Š
+Gsquid:S1135"2Complete the task associated to this TODO comment.(ªÉÕù
+`squid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(‹­£øÿÿÿÿ
