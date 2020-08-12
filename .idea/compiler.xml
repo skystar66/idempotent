@@ -6,13 +6,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="idmpotent-client" />
         <module name="idmpotent-core" />
-        <module name="idmpotent-demo" />
-        <module name="idmpotent-netty" />
-        <module name="idmpotent-netty-msg" />
         <module name="idmpotent-server" />
+        <module name="idmpotent-netty-msg" />
+        <module name="idmpotent-netty" />
+        <module name="idmpotent-demo" />
+        <module name="idmpotent-client" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="idmpotent-client" options="-parameters" />
+      <module name="idmpotent-core" options="-parameters" />
+      <module name="idmpotent-demo" options="-parameters" />
+      <module name="idmpotent-netty" options="-parameters" />
+      <module name="idmpotent-netty-msg" options="-parameters" />
+      <module name="idmpotent-server" options="-parameters" />
+    </option>
   </component>
 </project>
