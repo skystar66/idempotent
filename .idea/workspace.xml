@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4fabb9d-8529-4a91-b27b-64eed2da1fae" name="Default" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/idmpotent-client/src/main/java/com/tbex/idmpotent/client/cache/ServerCache.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/idmpotent-client/src/main/java/com/tbex/idmpotent/client/config/BeanConfig.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/idmpotent-client/src/main/java/com/tbex/idmpotent/client/kit/NetAddressIsReachable.java" afterDir="false" />
@@ -43,21 +44,21 @@
       <change beforePath="$PROJECT_DIR$/idmpotent-server/target/classes/com/tbex/idmpotent/server/utils/MySeqIdGen.class" beforeDir="false" afterPath="$PROJECT_DIR$/idmpotent-server/target/classes/com/tbex/idmpotent/server/utils/MySeqIdGen.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/idmpotent-server/target/classes/com/tbex/idmpotent/server/utils/RedisKeyUtil.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/idmpotent-demo/idmpotent-demo.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idmpotent-netty/idmpotent-netty.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idmpotent-server/src/main/java/com/tbex/idmpotent/server/server/IdmpotentServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/idmpotent-server/src/main/java/com/tbex/idmpotent/server/server/IdmpotentServerHandler.java" afterDir="false" />
+>>>>>>> be456a37f74a2d0a2b571833d0c5e4ba8643ccbc
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/target/" />
-    <ignored path="$PROJECT_DIR$/idmpotent-client/target/" />
-    <ignored path="$PROJECT_DIR$/idmpotent-demo/target/" />
-    <ignored path="$PROJECT_DIR$/idmpotent-netty/target/" />
-    <ignored path="$PROJECT_DIR$/idmpotent-netty-msg/target/" />
-    <ignored path="$PROJECT_DIR$/idmpotent-server/target/" />
-    <ignored path="$PROJECT_DIR$/idmpotent-core/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FUSProjectUsageTrigger">
     <session id="-189725569">
       <usages-collector id="statistics.lifecycle.project">
@@ -218,6 +219,8 @@
       </file>
     </leaf>
   </component>
+=======
+>>>>>>> be456a37f74a2d0a2b571833d0c5e4ba8643ccbc
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -225,6 +228,7 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="FindInProjectRecents">
     <findStrings>
       <find>statesJson</find>
@@ -329,6 +333,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+=======
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+>>>>>>> be456a37f74a2d0a2b571833d0c5e4ba8643ccbc
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -337,19 +346,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand />
-      <select />
-    </treeState>
-  </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="-1920" />
-    <option name="y" value="-180" />
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
-  </component>
+  <component name="ProjectId" id="1fytcNttrynAMzIlBHMK1Y4OlKq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+<<<<<<< HEAD
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -640,6 +639,8 @@
       <pane id="AndroidView" />
     </panes>
   </component>
+=======
+>>>>>>> be456a37f74a2d0a2b571833d0c5e4ba8643ccbc
   <component name="PropertiesComponent">
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
@@ -735,6 +736,7 @@
       </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -766,7 +768,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <properties />
       <listeners />
@@ -775,11 +778,19 @@
       </method>
     </configuration>
     <list>
+<<<<<<< HEAD
       <item itemvalue="Spring Boot.TestRedisIdpApplication" />
       <item itemvalue="Application.DateUtil" />
       <item itemvalue="Application.IDKeyGenUtil" />
       <item itemvalue="Spring Boot.IdmpotentServerApplication" />
       <item itemvalue="Application.MySeqIdGen" />
+=======
+      <item itemvalue="Application.DateUtil" />
+      <item itemvalue="Application.IDKeyGenUtil" />
+      <item itemvalue="JUnit.IdpTest.testSpanId (1)" />
+      <item itemvalue="JUnit.IdpTest.testThrowRuntimeEx" />
+      <item itemvalue="Spring Boot.TestRedisIdpApplication" />
+>>>>>>> be456a37f74a2d0a2b571833d0c5e4ba8643ccbc
     </list>
     <recent_temporary>
       <list>
@@ -807,8 +818,13 @@
       <workItem from="1587875783894" duration="33847000" />
       <workItem from="1589182976291" duration="1541000" />
       <workItem from="1593318152383" duration="22000" />
+<<<<<<< HEAD
       <workItem from="1597154578374" duration="1531000" />
       <workItem from="1597228170105" duration="11529000" />
+=======
+      <workItem from="1597154578374" duration="1415000" />
+      <workItem from="1597202245326" duration="1870000" />
+>>>>>>> be456a37f74a2d0a2b571833d0c5e4ba8643ccbc
     </task>
     <servers />
   </component>
@@ -844,6 +860,7 @@
       <configuration name="IdpTest.testSpanId (1)" configurationId="JUnit" />
     </history-entry>
   </component>
+<<<<<<< HEAD
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="116476000" />
   </component>
@@ -888,24 +905,42 @@
       <window_info anchor="right" id="Bean Validation" order="9" weight="0.3297568" />
     </layout>
   </component>
+=======
+>>>>>>> be456a37f74a2d0a2b571833d0c5e4ba8643ccbc
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
+<<<<<<< HEAD
+=======
+          <url>file://$PROJECT_DIR$/idmpotent-demo/src/main/java/com/tbex/idmpotent/test/controller/TestIdpController.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+>>>>>>> be456a37f74a2d0a2b571833d0c5e4ba8643ccbc
           <url>file://$PROJECT_DIR$/idmpotent-demo/src/main/java/com/tbex/idmpotent/test/aspect/CallReportAspect.java</url>
           <line>30</line>
-          <properties />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
+<<<<<<< HEAD
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/idmpotent-netty-msg/src/main/java/com/tbex/idmpotent/netty/msg/enums/EventType.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1300,6 +1335,8 @@
       </provider>
     </entry>
   </component>
+=======
+>>>>>>> be456a37f74a2d0a2b571833d0c5e4ba8643ccbc
   <component name="masterDetails">
     <states>
       <state key="ArtifactsStructureConfigurable.UI">

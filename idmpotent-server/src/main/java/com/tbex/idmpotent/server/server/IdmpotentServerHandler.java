@@ -70,6 +70,7 @@ public class IdmpotentServerHandler {
                 /**业务处理失败，RuntimeException*/
                 case BUSSINESS_RUNTIMEEXCEPTION_FAIL:
                     idmpotentManager.bussinesException(channel, rpcCmd);
+
                     break;
                 /**退出登录*/
                 case LOGOUT:
