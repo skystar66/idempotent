@@ -93,7 +93,7 @@ public class MessageCreator {
      * @param action action
      * @return MessageDto
      */
-    public static RpcCmd serverValidate(String traceId) {
+    public static RpcCmd serverExcuting(String traceId) {
         RpcCmd rpcCmd = new RpcCmd();
         rpcCmd.setKey(EventType.EXECUTING.name() +
                 SnowflakeIdWorker.getInstance().nextId());
@@ -106,6 +106,25 @@ public class MessageCreator {
         return rpcCmd;
     }
 
+    /**
+     * 创建生成幂等服务id
+     *
+     * @param action action
+     * @return MessageDto
+     */
+    public static RpcCmd createIdpId(String token) {
+        RpcCmd rpcCmd = new RpcCmd();
+        rpcCmd.setKey(EventType.CREATE_ID.name() +
+                SnowflakeIdWorker.getInstance().nextId());
+        MessageDto messageDto = new MessageDto();
+        messageDto.setState(MessageConstants.STATE_OK);
+        rpcCmd.setToken(token);
+        rpcCmd.setMsg(messageDto);
+        rpcCmd.setEvent(EventType.CREATE_ID.name());
+        rpcCmd.setToken(TokenProvider.get());
+        return rpcCmd;
+    }
+
 
     /**
      * 构建业务处理成功后请求
@@ -113,7 +132,7 @@ public class MessageCreator {
      * @param action action
      * @return MessageDto
      */
-    public static RpcCmd serverBussinessSuccess(String traceId) {
+    public static RpcCmd serverSuccess(String traceId) {
         RpcCmd rpcCmd = new RpcCmd();
         rpcCmd.setKey(EventType.BUSSINESS_SUCCESS.name() +
                 SnowflakeIdWorker.getInstance().nextId());

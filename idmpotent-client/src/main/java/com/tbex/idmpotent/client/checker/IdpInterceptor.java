@@ -17,6 +17,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.Executor;
 
 /**
  * @ClassName: IdpInterceptor
@@ -33,17 +34,18 @@ public class IdpInterceptor {
     @Autowired
     RpcClient rpcClient;
 
+    @Autowired
+    Executor taskExecutor;
+
     public Object intercept(ProceedingJoinPoint pjp) throws Throwable {
         //获取header中的 全局唯一id
         String traceId = getHeaderTraceId();
         log.info(">> idempotent intercept traceId {}", traceId);
         Object res;
         try {
-            //获取header中的token
-            log.info(">> idempotent enableidpAspectConfig traceId {}", traceId);
-            MessageDto messageDtoValidate = rpcClient.request(MessageCreator.serverValidate(traceId));
-            log.info("validate id response msg : {}", messageDtoValidate);
-            boolean resValidate = messageDtoValidate.loadBean(Boolean.class);
+            //获取header中的 幂等服务id
+            MessageDto messageDtoValidate = rpcClient.request(MessageCreator.serverExcuting(traceId));
+            log.info("excuting id response msg : {}", messageDtoValidate);
             if (messageDtoValidate.getState() == MessageConstants.STATE_OK) {
                 //执行业务
                 res = pjp.proceed();
@@ -52,12 +54,19 @@ public class IdpInterceptor {
                 throw new RejectException(Msgs.IDP_EXCEPTION, messageDtoValidate.loadBean(String.class));
             }
             if (res != null) {
-                //执行成功后 通知 幂等服务端处理
-                MessageDto messageDtoBussinessSuccess = rpcClient.request(MessageCreator.serverBussinessSuccess(traceId));
-                log.info("业务执行成功，traceId：{}", traceId);
+                //执行成功后 通知 幂等服务端处理，此处可使用线程池处理，防止幂等端掉不通情况
+                taskExecutor.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            rpcClient.request(MessageCreator.serverSuccess(traceId));
+                            log.info("业务执行成功，traceId：{}", traceId);
+                        } catch (Exception ex) {
+                            log.error("调用幂等服务失败，通知幂等服务该请求已成功结束！ error:{}", ex);
+                        }
+                    }
+                });
             }
-            log.info("<< idempotent enableidpAspectConfig traceId {}", traceId);
-
         } catch (RpcException cause) {
             throw new IdpException(Msgs.IDPKEY_GEN_EXCEPTION, cause);
         } catch (RejectException cause) {
@@ -65,7 +74,7 @@ public class IdpInterceptor {
         } catch (InterruptedException cause) {
             throw new IdpException(Msgs.IDP_BLOCKINGCHECK_EXCEPTION, cause);
         } catch (Throwable cause) {
-            //全局异常处理
+            //全局异常处理,业务执行异常
             onException(cause, traceId);
             throw cause;
         }

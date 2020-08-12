@@ -1,6 +1,7 @@
 package com.tbex.idmpotent.client.client;
 
 
+import com.tbex.idmpotent.client.enums.RpcResponseState;
 import com.tbex.idmpotent.netty.msg.dto.MessageDto;
 import com.tbex.idmpotent.netty.msg.dto.RpcCmd;
 
@@ -12,6 +13,31 @@ import com.tbex.idmpotent.netty.msg.dto.RpcCmd;
  * @author xuliang
  */
 public abstract class RpcClient {
+
+
+
+
+    /**
+     * 发送指令不需要返回数据，需要知道返回状态
+     *
+     * @param rpcCmd 指令内容
+     * @return 指令状态
+     * @throws RpcException 远程调用请求异常
+     */
+
+    public abstract RpcResponseState send(RpcCmd rpcCmd) throws Exception;
+
+
+    /**
+     * 发送指令不需要返回数据，需要知道返回的状态
+     *
+     * @param remoteKey 远程标识关键字
+     * @param msg       指令内容
+     * @return 指令状态
+     * @throws RpcException 远程调用请求异常
+     */
+    public abstract RpcResponseState send(String remoteKey, MessageDto msg) throws Exception;
+
 
 
     /**

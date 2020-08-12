@@ -1,5 +1,6 @@
 package com.tbex.idmpotent.client.client;
 
+import com.tbex.idmpotent.client.enums.RpcResponseState;
 import com.tbex.idmpotent.client.loadbalance.RpcLoadBalance;
 import com.tbex.idmpotent.netty.content.RpcCmdContext;
 import com.tbex.idmpotent.netty.content.RpcContent;
@@ -25,6 +26,18 @@ public class NettyRpcClient extends RpcClient {
     @Autowired
     RpcLoadBalance rpcLoadBalancel;
 
+
+    @Override
+    public RpcResponseState send(RpcCmd rpcCmd) throws Exception {
+//        return SocketManager.getInstance().send(rpcCmd.getRemoteKey(), rpcCmd);
+        return null;
+
+    }
+
+    @Override
+    public RpcResponseState send(String remoteKey, MessageDto msg) throws Exception {
+        return null;
+    }
 
     @Override
     public MessageDto request(RpcCmd rpcCmd) throws Exception {

@@ -20,4 +20,22 @@ public class IdmpomtentClientConfig {
     private int port;
 
 
+    /**
+     * 每个server的连接池数
+     */
+
+    private int poolServerSize;
+
+
+    /**
+     * zk path
+     */
+    private String zkRoot;
+
+    /**
+     * zk address
+     */
+    private String zkAddress;
+
+
 }

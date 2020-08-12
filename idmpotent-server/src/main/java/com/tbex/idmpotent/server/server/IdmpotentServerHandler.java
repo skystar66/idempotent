@@ -1,24 +1,17 @@
 package com.tbex.idmpotent.server.server;
 
-import com.tbex.idmpotent.netty.msg.RpcAnswer;
-import com.tbex.idmpotent.netty.msg.dto.MessageDto;
 import com.tbex.idmpotent.netty.msg.dto.RpcCmd;
 import com.tbex.idmpotent.netty.msg.enums.EventType;
 import com.tbex.idmpotent.netty.msg.enums.ResponseCode;
 import com.tbex.idmpotent.server.server.channel.NettyChannelManager;
 import com.tbex.idmpotent.server.server.manager.IdmpotentManager;
-import com.tbex.idmpotent.server.utils.JsonUtils;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
 
-import static com.tbex.idmpotent.netty.msg.MessageConstants.MSG_NULL;
-import static com.tbex.idmpotent.netty.msg.MessageConstants.STATE_OK;
 
 @Component
 @Slf4j
@@ -58,7 +51,7 @@ public class IdmpotentServerHandler {
                 case LOGIN:
                     idmpotentManager.handleLogin(channel, rpcCmd);
                     break;
-                    /**生成id*/
+                /**生成id*/
                 case CREATE_ID:
                     idmpotentManager.createId(channel, rpcCmd);
                     break;
@@ -70,12 +63,14 @@ public class IdmpotentServerHandler {
                 case BUSSINESS_SUCCESS:
                     idmpotentManager.success(channel, rpcCmd);
                     break;
-//                /**业务处理失败，exception*/
-//                case BUSSINESS_FAIL:
-//                    break;
-//                /**业务处理失败，RuntimeException*/
-//                case BUSSINESS_RUNTIMEEXCEPTION_FAIL:
-//                    break;
+                /**程序异常，exception*/
+                case BUSSINESS_FAIL:
+                    idmpotentManager.executing(channel, rpcCmd);
+                    break;
+                /**业务处理失败，RuntimeException*/
+                case BUSSINESS_RUNTIMEEXCEPTION_FAIL:
+                    idmpotentManager.bussinesException(channel, rpcCmd);
+                    break;
                 /**退出登录*/
                 case LOGOUT:
                     idmpotentManager.handleLogout(channel, rpcCmd);

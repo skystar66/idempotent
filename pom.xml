@@ -161,6 +161,12 @@
             <version>${jackson.version}</version>
         </dependency>
 
+        <!--zookeeper-->
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.1</version>
+        </dependency>
 
 
 

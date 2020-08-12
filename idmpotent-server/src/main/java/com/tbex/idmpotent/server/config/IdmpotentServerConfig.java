@@ -32,4 +32,18 @@ public class IdmpotentServerConfig {
 
     private Integer countnum;
 
+
+
+    /**
+     * zk path
+     */
+    private String zkRoot;
+
+    /**
+     * zk address
+     */
+    private String zkAddress;
+
+    private boolean zkSwitch;
+
 }

@@ -5,9 +5,9 @@ import com.tbex.idmpotent.server.core.IdpKey;
 import com.tbex.idmpotent.server.core.Pair;
 import com.tbex.idmpotent.server.core.enums.KeyState;
 import com.tbex.idmpotent.server.exception.KeyStoreException;
+import com.tbex.idmpotent.server.utils.CacheKeyUtil;
 import com.tbex.idmpotent.server.utils.FileUtil;
 import com.tbex.idmpotent.server.utils.JsonUtils;
-import com.tbex.idmpotent.server.utils.RedisKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -70,10 +70,10 @@ public class IDKeyStore {
                                   Set<KeyState> keyStates) throws KeyStoreException {
 
         IdpKey idpKey = null;
-        String cacheStr = fastStorage.get(RedisKeyUtil.getIdpKeyById(bussinessType, id));
+        String cacheStr = fastStorage.get(CacheKeyUtil.getIdpKeyById(bussinessType, id));
         if (StringUtils.isEmpty(cacheStr)) {
             idpKey = jdbcKeyStore.get(id, keyStates);
-            fastStorage.set(RedisKeyUtil.getIdpKeyById(bussinessType, id), JsonUtils.toJSONString(idpKey));
+            fastStorage.set(CacheKeyUtil.getIdpKeyById(bussinessType, id), JsonUtils.toJSONString(idpKey));
         } else {
             idpKey = JsonUtils.parseString(cacheStr, IdpKey.class);
         }

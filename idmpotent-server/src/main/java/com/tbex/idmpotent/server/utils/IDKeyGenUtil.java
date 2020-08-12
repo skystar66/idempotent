@@ -7,6 +7,7 @@ import com.tbex.idmpotent.server.exception.KeyGenException;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Base64;
+import java.util.Date;
 
 import static com.tbex.idmpotent.server.utils.Constants.IDPKEY_COMPRESS_EXCEPTION;
 
@@ -41,10 +42,36 @@ public class IDKeyGenUtil {
         }
     }
 
+    /**
+     * 幂等服务初始化
+     */
     public static IdpKey newExecuting(String id) {
-
         return new IdpKey()
                 .setId(id)
+                .setCreatedTime(new Date())
+                .setKeyState(KeyState.EXECUTING);
+
+    }
+
+    /**
+     * 程序业务异常
+     */
+    public static IdpKey newBussinessException(String id) {
+        return new IdpKey()
+                .setId(id)
+                .setCreatedTime(new Date())
+                .setKeyState(KeyState.BUSSINESS_EXCEPTION);
+
+    }
+
+
+    /**
+     * 程序异常
+     */
+    public static IdpKey newException(String id) {
+        return new IdpKey()
+                .setId(id)
+                .setCreatedTime(new Date())
                 .setKeyState(KeyState.EXECUTING);
 
     }

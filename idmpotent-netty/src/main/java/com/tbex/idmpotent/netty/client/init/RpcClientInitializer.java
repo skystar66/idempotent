@@ -6,6 +6,8 @@ import com.tbex.idmpotent.netty.enums.NettyType;
 import com.tbex.idmpotent.netty.msg.manager.SocketChannelManager;
 import com.tbex.idmpotent.netty.util.NettyContext;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -36,13 +38,13 @@ public class RpcClientInitializer implements DisposableBean {
     SocketChannelManager socketChannelManager;
 
 
-    private EventLoopGroup workerGroup;
+    private EventLoopGroup workerGroup = new NioEventLoopGroup();
+    ;
 
 
     public void init(List<ManagerProperties> hosts, boolean sync) {
         NettyContext.nettyType = NettyType.client;
         NettyContext.params = hosts;
-        workerGroup = new NioEventLoopGroup();
         for (ManagerProperties host : hosts) {
             Optional<Future> future = connect(new InetSocketAddress(host.getRpcHost(), host.getRpcPort()));
             log.info("Success Connect Topic Server Address : {}", host.getRpcHost() + ":" + host.getRpcPort());
@@ -55,6 +57,22 @@ public class RpcClientInitializer implements DisposableBean {
             }
         }
     }
+
+    public Channel init(String host, Integer port, boolean sync) {
+        NettyContext.nettyType = NettyType.client;
+        NettyContext.params = host;
+        Optional<Future> future = connect(new InetSocketAddress(host, port));
+        log.info("Success Connect Idp Server Address : {}", host + ":" + port);
+        if (sync && future.isPresent()) {
+            try {
+                return ((ChannelFuture) future.get().get(10, TimeUnit.SECONDS)).channel();
+            } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        return null;
+    }
+
 
     public synchronized Optional<Future> connect(SocketAddress socketAddress) {
         for (int i = 0; i < 3; i++) {

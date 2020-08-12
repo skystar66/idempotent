@@ -13,12 +13,12 @@ import java.util.concurrent.atomic.AtomicLong;
 public class MySeqIdGen {
 
 
-    private static AtomicLong default_seq = new AtomicLong(0L);
-    private static String default_seq_prefix = "USDT";
+    public static AtomicLong default_seq = new AtomicLong(0L);
+    public static String default_seq_prefix = "USDT";
 
 
     //节点编号
-    private static String node = "00";
+    public static String node = "00";
 
     static {
         try {
@@ -52,6 +52,8 @@ public class MySeqIdGen {
 //			String str1 =   String.format("%08d",(int) pay_seq.getAndIncrement() % 1000000);
 //        int num = (int) pay_seq.getAndIncrement();
 //		System.out.println(str+"----->>" +str1);
+
+        System.out.println((default_seq_prefix+node).length());
 
 
     }

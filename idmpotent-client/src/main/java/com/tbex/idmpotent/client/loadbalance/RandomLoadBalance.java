@@ -33,4 +33,14 @@ public class RandomLoadBalance implements RpcLoadBalance {
         }
         return null;
     }
+
+    @Override
+    public Channel getToRemoteChannel() throws Exception {
+        return null;
+    }
+
+    @Override
+    public Channel getHashRemoteChannel() throws Exception {
+        return null;
+    }
 }

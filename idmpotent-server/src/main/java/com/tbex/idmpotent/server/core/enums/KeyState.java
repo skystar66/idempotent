@@ -5,33 +5,24 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum KeyState {
 
-    /**
-     * 目标未执行（不应该出现）
-     */
-    NONE(1),
-    /**
-     * 目标得到执行并成功
-     */
-    SUCCESS(2),
-    /**
-     * 目标执行中（如果）
-     */
-    EXECUTING(4),
-
 
     /**
-     * 重试目标执行中（如果）
+     * 成功
      */
-    RETRY_EXECUTING(5),
+    SUCCESS(1),
+    /**
+     * 执行中
+     */
+    EXECUTING(2),
 
     /**
-     * 目标执行失败且可再次执行（抛出Exception）
+     * 程序异常，不允许重试
      */
-    FAIL(8),
+    EXCEPTION(3),
     /**
-     * 目标执行失败且不可再次执行（抛出RuntimeException或Error）
+     * 业务执行失败，允许重试
      */
-    RUNTIME_FAIL(16);
+    BUSSINESS_EXCEPTION(4);
 
     int value;
 

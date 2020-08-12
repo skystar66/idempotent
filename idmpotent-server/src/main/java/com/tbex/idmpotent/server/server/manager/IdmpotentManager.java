@@ -147,5 +147,42 @@ public class IdmpotentManager {
         }
     }
 
+    /**
+     * @return
+     * @Author xuliang
+     * @Description //TODO 流程节点：业务处理异常
+     * @Date 下午3:52 2020/8/12
+     * @Param channel, rpcCmd
+     **/
+    public void bussinesException(Channel channel, RpcCmd rpcCmd) {
+        try {
+            idpChecker.bussinesException(channel, rpcCmd);
+        } catch (Exception ex) {
+            log.error("幂等服务异常，executing errorMsg：{}", ex);
+        }
+    }
+
+
+    /**
+     * @return
+     * @Author xuliang
+     * @Description //TODO 流程节点：程序异常
+     * @Date 下午3:52 2020/8/12
+     * @Param channel, rpcCmd
+     **/
+    public void exception(Channel channel, RpcCmd rpcCmd) {
+        try {
+            idpChecker.exception(channel, rpcCmd);
+        } catch (Exception ex) {
+            log.error("幂等服务异常，executing errorMsg：{}", ex);
+        }
+    }
+
+
+
+
+
+
+
 
 }

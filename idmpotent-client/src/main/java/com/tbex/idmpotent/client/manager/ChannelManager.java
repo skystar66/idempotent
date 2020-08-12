@@ -1,12 +1,17 @@
 package com.tbex.idmpotent.client.manager;
 
 import com.tbex.idmpotent.client.client.channel.NettyChannelManager;
+import com.tbex.idmpotent.client.pool.ConnectionPoolFactory;
 import com.tbex.idmpotent.netty.msg.manager.SocketChannelManager;
 import io.netty.channel.Channel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ChannelManager implements SocketChannelManager {
+
+    @Autowired
+    ConnectionPoolFactory connectionPoolFactory;
 
     @Override
     public void addChannel(Channel channel) {
@@ -16,6 +21,7 @@ public class ChannelManager implements SocketChannelManager {
     @Override
     public void removeChannel(Channel channel) {
         NettyChannelManager.getInstance().removeChannel(channel);
+        connectionPoolFactory.removeConnect(channel);
     }
 
     @Override

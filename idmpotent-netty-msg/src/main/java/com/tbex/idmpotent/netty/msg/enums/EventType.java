@@ -18,9 +18,9 @@ public enum EventType {
      */
     heartCheck,
 
-    // 生成全局唯一id请求
+    //
     /**
-     * 订阅
+     * 生成全局唯一id请求
      */
     CREATE_ID,
     /**
@@ -40,7 +40,7 @@ public enum EventType {
      */
     BUSSINESS_SUCCESS,
     /**
-     * 业务异常exception
+     * 程序 exception
      */
     BUSSINESS_FAIL,
     /**
