@@ -75,6 +75,11 @@ public class RedisStorage implements FastStorage {
     }
 
     @Override
+    public boolean exist(String key) {
+        return redisTemplate.hasKey(key);
+    }
+
+    @Override
     public boolean del(String key) {
         return Optional.ofNullable(redisTemplate.delete(key)).orElse(false);
     }

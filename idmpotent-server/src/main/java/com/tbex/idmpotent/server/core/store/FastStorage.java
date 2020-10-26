@@ -37,6 +37,9 @@ public interface FastStorage {
 
     long decr(final String key);
 
+    /**是否存在*/
+    boolean exist(final String key);
+
     /**
      * 删
      */

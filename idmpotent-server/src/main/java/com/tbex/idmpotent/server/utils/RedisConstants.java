@@ -7,5 +7,8 @@ public class RedisConstants {
     public static final String NOTIFY = "notify";
 
 
+    public static final int default_request_time_out=5*60;
+
+
 
 }
