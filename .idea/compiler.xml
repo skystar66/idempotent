@@ -7,11 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="idmpotent-core" />
-        <module name="idmpotent-server" />
         <module name="idmpotent-netty-msg" />
+        <module name="idmpotent-server" />
         <module name="idmpotent-netty" />
-        <module name="idmpotent-demo" />
         <module name="idmpotent-client" />
+        <module name="idmpotent-demo" />
       </profile>
     </annotationProcessing>
   </component>

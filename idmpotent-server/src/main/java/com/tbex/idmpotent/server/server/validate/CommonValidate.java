@@ -16,6 +16,13 @@ public class CommonValidate {
 
     @Autowired
     FastStorage fastStorage;
+
+
+    /**
+     * 公共校验：校验发放上的参数 MD5
+     * 防止重复提交！
+     */
+
     public void checkCommonValidate(Channel channel, RpcCmd rpcCmd) {
         String key = MD5.crypt(rpcCmd.toString());
         if (fastStorage.exist(key)) {
