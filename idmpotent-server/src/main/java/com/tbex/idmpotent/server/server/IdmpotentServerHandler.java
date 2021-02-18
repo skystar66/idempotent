@@ -44,41 +44,46 @@ public class IdmpotentServerHandler {
                 channel.writeAndFlush(MessageCreator.bussinesError(rpcCmd, ResponseCode.NOT_LOGIN));
                 return;
             }
-            //具体业务处理
-            EventType eventType = EventType.of(rpcCmd.getEvent());
-            switch (eventType) {
-                /**登录*/
-                case LOGIN:
-                    idmpotentManager.handleLogin(channel, rpcCmd);
-                    break;
-                /**生成id*/
-                case CREATE_ID:
-                    idmpotentManager.createId(channel, rpcCmd);
-                    break;
-                /**幂等校验*/
-                case EXECUTING:
-                    idmpotentManager.executing(channel, rpcCmd);
-                    break;
-                /**处理成功*/
-                case BUSSINESS_SUCCESS:
-                    idmpotentManager.success(channel, rpcCmd);
-                    break;
-                /**程序异常，exception*/
-                case BUSSINESS_FAIL:
-                    idmpotentManager.executing(channel, rpcCmd);
-                    break;
-                /**业务处理失败，RuntimeException*/
-                case BUSSINESS_RUNTIMEEXCEPTION_FAIL:
-                    idmpotentManager.bussinesException(channel, rpcCmd);
 
-                    break;
-                /**退出登录*/
-                case LOGOUT:
-                    idmpotentManager.handleLogout(channel, rpcCmd);
-                    break;
-                default:
-                    break;
-            }
+            /**新版本*/
+            idmpotentManager.execute(channel,rpcCmd);
+
+            /**旧版*/
+//            //具体业务处理
+//            EventType eventType = EventType.of(rpcCmd.getEvent());
+//            switch (eventType) {
+//                /**登录*/
+//                case LOGIN:
+//                    idmpotentManager.handleLogin(channel, rpcCmd);
+//                    break;
+//                /**生成id*/
+//                case CREATE_ID:
+//                    idmpotentManager.createId(channel, rpcCmd);
+//                    break;
+//                /**幂等校验*/
+//                case EXECUTING:
+//                    idmpotentManager.executing(channel, rpcCmd);
+//                    break;
+//                /**处理成功*/
+//                case BUSSINESS_SUCCESS:
+//                    idmpotentManager.success(channel, rpcCmd);
+//                    break;
+//                /**程序异常，exception*/
+//                case BUSSINESS_FAIL:
+//                    idmpotentManager.executing(channel, rpcCmd);
+//                    break;
+//                /**业务处理失败，RuntimeException*/
+//                case BUSSINESS_RUNTIMEEXCEPTION_FAIL:
+//                    idmpotentManager.bussinesException(channel, rpcCmd);
+//
+//                    break;
+//                /**退出登录*/
+//                case LOGOUT:
+//                    idmpotentManager.handleLogout(channel, rpcCmd);
+//                    break;
+//                default:
+//                    break;
+//            }
         } catch (Exception ex) {
             log.error("执行幂等服务 发生错误, errMsg:{}", ex);
         }

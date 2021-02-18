@@ -2,7 +2,7 @@ package com.tbex.idmpotent.test.controller;
 
 import com.tbex.idmpotent.client.annotation.EnableIdp;
 import com.tbex.idmpotent.client.client.MessageCreator;
-import com.tbex.idmpotent.client.client.RpcClient;
+import com.tbex.idmpotent.client.client.ReqRpcClient;
 import com.tbex.idmpotent.netty.msg.dto.MessageDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,13 @@ public class BusinnesIdpController {
 
 
     @Autowired
-    RpcClient rpcClient;
+    ReqRpcClient reqRpcClient;
 
 
     @RequestMapping("/login")
     private String login() throws Exception {
 
-        MessageDto messageDto = rpcClient.request(MessageCreator.serverLogin("admin", "123456"));
+        MessageDto messageDto = reqRpcClient.request(MessageCreator.serverLogin("admin", "123456"));
         return messageDto.loadBean(String.class);
     }
 
@@ -38,7 +38,7 @@ public class BusinnesIdpController {
     @RequestMapping("/createIdpId")
     private String createIdpId(@RequestParam("token") String token) throws Exception {
 
-        MessageDto messageDtoValidate = rpcClient.request(MessageCreator.createIdpId(token));
+        MessageDto messageDtoValidate = reqRpcClient.request(MessageCreator.createIdpId(token));
 
         return messageDtoValidate.loadBean(String.class);
     }

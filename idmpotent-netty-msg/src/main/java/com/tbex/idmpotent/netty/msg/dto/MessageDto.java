@@ -19,21 +19,29 @@ import java.io.Serializable;
 public class MessageDto implements Serializable {
 
 
-    /**
-     * 请求动作
-     */
-    private String cmd;
+//    /**
+//     * 请求动作
+//     */
+//    private String cmd;
 
+    /**幂等id*/
+    private String idempotentId;
 
+    /**流水id*/
+    private String traceID;
     /**
      * 请求参数
      */
     private Serializable data;
-
+    /**方法名*/
+    private String method;
+    /**接口路径uri*/
+    private String uri;
     /**
      * 请求状态
      */
     private int state = MessageConstants.STATE_REQUEST;
+
 
 
     public <T> T loadBean(Class<T> tClass) {

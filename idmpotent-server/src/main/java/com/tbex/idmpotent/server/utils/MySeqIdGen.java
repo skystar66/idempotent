@@ -38,7 +38,7 @@ public class MySeqIdGen {
     private static String getSeq(String prefix, AtomicLong seq) {
         prefix += node;
         //预留八位增长空间
-        return String.format("%s%s%012d", prefix, System.currentTimeMillis(), (int) seq.getAndIncrement() % 1000000);
+        return String.format("%s%s%08d", prefix, System.currentTimeMillis(), (int) seq.getAndIncrement() % 1000000);
     }
 
     public static void main(String[] args) {
@@ -53,7 +53,7 @@ public class MySeqIdGen {
 //        int num = (int) pay_seq.getAndIncrement();
 //		System.out.println(str+"----->>" +str1);
 
-        System.out.println((default_seq_prefix+node).length());
+        System.out.println(getId());
 
 
     }

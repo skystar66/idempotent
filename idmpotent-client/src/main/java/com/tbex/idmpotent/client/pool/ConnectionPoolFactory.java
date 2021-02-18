@@ -1,116 +1,70 @@
 package com.tbex.idmpotent.client.pool;
 
-import com.google.common.cache.LoadingCache;
-import com.tbex.idmpotent.client.config.IdmpomtentClientConfig;
-import com.tbex.idmpotent.client.weight.ServerAdrWeight;
-import com.tbex.idmpotent.client.weight.ServerNode;
-import com.tbex.idmpotent.netty.client.init.RpcClientInitializer;
-import io.netty.channel.Channel;
+
+import com.tbex.idmpotent.client.pool.connect.ConnectionCache;
+import com.tbex.idmpotent.client.pool.manager.RpcClientManager;
+import com.tbex.idmpotent.client.utils.BeanJsonUtil;
+import com.tbex.idmpotent.netty.node.NodeInfo;
+import com.tbex.idmpotent.netty.util.AddressUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author xl
+ * @date: 2020-12-18
+ * @desc: 连接池调度管理工厂
+ */
 @Slf4j
-@Component
 public class ConnectionPoolFactory {
+    private static class InstanceHolder {
+        public static final ConnectionPoolFactory instance
+                = new ConnectionPoolFactory();
+    }
 
+    public ConnectionPoolFactory() {
 
-    @Autowired
-    IdmpomtentClientConfig idmpomtentClientConfig;
+    }
 
-    @Autowired
-    RpcClientInitializer rpcClientInitializer;
+    public static ConnectionPoolFactory getInstance() {
+        return InstanceHolder.instance;
+    }
 
 
     /**
-     * 共享连接 nodeId ----> channels
+     * 初始化zk RPC连接
+     *
+     * @param
      */
-    public static final Map<ServerNode, List<Channel>> sharedConnectPool = new ConcurrentHashMap<>();
+    public void zkSyncRpcServer(NodeInfo nodeInfo) {
 
-
-    /**
-     * 添加链接
-     */
-    public void addConnect(LoadingCache<ServerNode, ServerAdrWeight> serverCacheMap) {
-        if (serverCacheMap == null) {
-            log.warn("Server 端服务列表为空，请注册Server服务器！");
-            return;
+        /**配置的连接池队列 一定要比缓存的连接池队列数量要大，只支持高峰时期的扩容，不支持缩容*/
+        int rpcPoolSize = nodeInfo.getRpcPoolSize();
+        int cacheRpcpoolSize = ConnectionCache.rpcPoolSize();
+        int initIndex = 0;
+        if (cacheRpcpoolSize > 0) {
+            initIndex = cacheRpcpoolSize;
         }
-        for (int i = 0; i < idmpomtentClientConfig.getPoolServerSize(); i++) {
+        final String localIp = AddressUtils.getInnetIp();
+        try {
+            log.info("###### 开始连接 rpc长连接服务...	localIp={},  nodeInfo={},  zkPath={}", localIp,
+                    BeanJsonUtil.toJson(nodeInfo)
+                    , nodeInfo.getZkRpcPath());
+            //创建连接池
+            for (int index = initIndex; index < rpcPoolSize; index++) {
+                int finalIndex = index;
 
-            serverCacheMap.asMap().entrySet().stream().forEach(serverNodeServerAdrWeightEntry -> {
-                if (serverNodeServerAdrWeightEntry.getKey().getAvailable() == 1) {
-                    /**可用*/
-                    /**是否存在当前节点channel*/
-                    sharedConnectPool.keySet().stream().forEach(serverNode -> {
-                        if (serverNode.getNodeId().equals(serverNodeServerAdrWeightEntry.getKey().getNodeId())) {
-                            return;
-                        }
-                    });
-                    ServerAdrWeight serverAdrWeight = serverNodeServerAdrWeightEntry.getValue();
-                    //开始连接server端
-                    Channel channel = rpcClientInitializer.init(serverAdrWeight.getIp(), serverAdrWeight.getPort(), true);
-                    if (sharedConnectPool.keySet().contains(serverAdrWeight.getNodeId())) {
-                        sharedConnectPool.get(serverNodeServerAdrWeightEntry.getKey()).add(channel);
-                    } else {
-                        sharedConnectPool.put(serverNodeServerAdrWeightEntry.getKey(), Arrays.asList(channel));
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        RpcClientManager.getInstance().connect(nodeInfo, finalIndex);
                     }
-                } else {
-                    /**不可用*/
-                    sharedConnectPool.keySet().stream().forEach(serverNode -> {
-                        if (serverNode.getNodeId().equals(serverNodeServerAdrWeightEntry.getKey().getNodeId())) {
-                            /**设置为不可用*/
-                            serverNodeServerAdrWeightEntry.getKey().setAvailable(0);
-                        }
-                    });
-                }
-            });
-
-
+                }).start();
+            }
+        } catch (Exception e) {
+            log.error("RPC create error! 服务创建失败! host=" + nodeInfo.getIp() + "	" + e);
         }
+
     }
 
-
-    /**
-     * 掉线链接，删除掉
-     */
-    public void removeConnect(Channel channel) {
-        if (!sharedConnectPool.values().contains(channel)) {
-            return;
-        }
-        sharedConnectPool.values().remove(channel);
-    }
-
-
-    /**
-     * 根据幂等id 获取可用的指定服务列表
-     */
-    public List<Channel> getChannelsByIdpId(String idpId) {
-        String nodeID = idpId.substring(0, 2);
-        return sharedConnectPool.get(nodeID);
-    }
-
-
-//    /**
-//     * 根据权重获取server 端服务
-//     */
-//
-//    public ServerAdrWeight getServerRoute(int weight, LoadingCache<String, ServerAdrWeight> serverCacheMap) {
-//        int random = RandomUtils.nextInt(0, weight);
-//        int sum = 0;
-//
-//        for (Map.Entry<String, ServerAdrWeight> stringServerAdrWeightEntry : serverCacheMap.asMap().entrySet()) {
-//            sum += stringServerAdrWeightEntry.getValue().getWeight();
-//            if (sum > 0 && sum >= random) {
-//                return stringServerAdrWeightEntry.getValue();
-//            }
-//        }
-//        return null;
-//    }
 
 }

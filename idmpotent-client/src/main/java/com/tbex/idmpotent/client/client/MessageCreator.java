@@ -61,11 +61,13 @@ public class MessageCreator {
      * @param action action
      * @return MessageDto
      */
-    public static MessageDto serverException(String action) {
+    public static RpcCmd serverException(String action) {
+        RpcCmd rpcCmd = new RpcCmd();
         MessageDto messageDto = new MessageDto();
-        messageDto.setCmd(action);
+        rpcCmd.setEvent(action);
         messageDto.setState(MessageConstants.STATE_EXCEPTION);
-        return messageDto;
+        rpcCmd.setMsg(messageDto);
+        return rpcCmd;
     }
 
 
@@ -93,13 +95,15 @@ public class MessageCreator {
      * @param action action
      * @return MessageDto
      */
-    public static RpcCmd serverExcuting(String traceId) {
+    public static RpcCmd serverExcuting(String traceId,Object[] args,String uri) {
         RpcCmd rpcCmd = new RpcCmd();
         rpcCmd.setKey(EventType.EXECUTING.name() +
                 SnowflakeIdWorker.getInstance().nextId());
         MessageDto messageDto = new MessageDto();
-        messageDto.setData(traceId);
+        messageDto.setTraceID(traceId);
         messageDto.setState(MessageConstants.STATE_OK);
+        messageDto.setUri(uri);
+        messageDto.setData(args);
         rpcCmd.setMsg(messageDto);
         rpcCmd.setEvent(EventType.EXECUTING.name());
         rpcCmd.setToken(TokenProvider.get());
@@ -137,7 +141,7 @@ public class MessageCreator {
         rpcCmd.setKey(EventType.BUSSINESS_SUCCESS.name() +
                 SnowflakeIdWorker.getInstance().nextId());
         MessageDto messageDto = new MessageDto();
-        messageDto.setData(traceId);
+        messageDto.setTraceID(traceId);
         messageDto.setState(MessageConstants.STATE_OK);
         rpcCmd.setMsg(messageDto);
         rpcCmd.setEvent(EventType.BUSSINESS_SUCCESS.name());
@@ -157,7 +161,7 @@ public class MessageCreator {
         rpcCmd.setKey(EventType.BUSSINESS_FAIL.name() +
                 SnowflakeIdWorker.getInstance().nextId());
         MessageDto messageDto = new MessageDto();
-        messageDto.setData(traceId);
+        messageDto.setTraceID(traceId);
         messageDto.setState(MessageConstants.STATE_OK);
         rpcCmd.setMsg(messageDto);
         rpcCmd.setEvent(EventType.BUSSINESS_FAIL.name());
@@ -176,7 +180,7 @@ public class MessageCreator {
         rpcCmd.setKey(EventType.BUSSINESS_RUNTIMEEXCEPTION_FAIL.name() +
                 SnowflakeIdWorker.getInstance().nextId());
         MessageDto messageDto = new MessageDto();
-        messageDto.setData(traceId);
+        messageDto.setTraceID(traceId);
         messageDto.setState(MessageConstants.STATE_OK);
         rpcCmd.setMsg(messageDto);
         rpcCmd.setEvent(EventType.BUSSINESS_RUNTIMEEXCEPTION_FAIL.name());

@@ -1,19 +1,0 @@
-
-ssquid:UselessImportCheck"JRemove this unused import 'com.tbex.idmpotent.netty.msg.MessageConstants'.(ê–‹Á8’…ˆš.
-zsquid:UselessImportCheck"LRemove this unused import 'com.tbex.idmpotent.client.client.MessageCreator'.(´ìŒ‘øÿÿÿÿ8’…ˆš.
-wsquid:UselessImportCheck"IRemove this unused import 'com.tbex.idmpotent.netty.msg.enums.EventType'.(˜¤øûúÿÿÿÿ8à”´‡š.
-‚squid:UselessImportCheck"YRemove this unused import 'org.springframework.web.context.request.RequestContextHolder'.(ºãê8öùé‡š.
-ysquid:UselessImportCheck"PRemove this unused import 'com.tbex.idmpotent.client.exception.RejectException'.(ı‰ô×8’…ˆš.
-squid:UselessImportCheck"VRemove this unused import 'org.springframework.web.context.request.RequestAttributes'.(¢“…°8‰‡š.
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(êù¹å8ï”ÿ™.
-ksquid:UselessImportCheck"BRemove this unused import 'javax.servlet.http.HttpServletRequest'.(ø©¹…8öùé‡š.
-usquid:UselessImportCheck"LRemove this unused import 'com.tbex.idmpotent.netty.util.SnowflakeIdWorker'.(¸ …8à”´‡š.
-tsquid:UselessImportCheck"FRemove this unused import 'com.tbex.idmpotent.client.utils.Constants'.(ŞçñÔşÿÿÿÿ8öùé‡š.
-rsquid:UselessImportCheck"DRemove this unused import 'com.tbex.idmpotent.netty.msg.dto.RpcCmd'.(Ùµ¼¤ûÿÿÿÿ8à”´‡š.
-Ssquid:S1135"2Complete the task associated to this TODO comment.(–¦‹şÿÿÿÿ8·¯ß†š.
-qsquid:UselessImportCheck"HRemove this unused import 'com.tbex.idmpotent.netty.msg.dto.MessageDto'.(¨Æ´À8’…ˆš.
-nsquid:UselessImportCheck"ERemove this unused import 'com.tbex.idmpotent.client.exception.Msgs'.(İŞ¸Æ8’…ˆš.
-csquid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(À‡»8’…ˆš.
-†squid:UselessImportCheck"]Remove this unused import 'org.springframework.web.context.request.ServletRequestAttributes'.(şĞ‘Ÿ8öùé‡š.
-psquid:UselessImportCheck"GRemove this unused import 'com.tbex.idmpotent.client.client.RpcClient'.(Šÿ¿8ÃÁˆš.
-osquid:UselessImportCheck"FRemove this unused import 'org.springframework.core.annotation.Order'.(Ö¨æ8îÙß†š.

@@ -20,7 +20,6 @@ public class RpcCmd implements Serializable {
      */
     private String remoteKey;
 
-
     /**
      * eventEnum
      */

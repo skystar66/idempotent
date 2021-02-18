@@ -1,7 +1,7 @@
 package com.tbex.idmpotent.client.checker;
 
 import com.tbex.idmpotent.client.client.MessageCreator;
-import com.tbex.idmpotent.client.client.RpcClient;
+import com.tbex.idmpotent.client.client.ReqRpcClient;
 import com.tbex.idmpotent.client.exception.IdpException;
 import com.tbex.idmpotent.client.exception.Msgs;
 import com.tbex.idmpotent.client.exception.RejectException;
@@ -32,7 +32,7 @@ public class IdpInterceptor {
 
 
     @Autowired
-    RpcClient rpcClient;
+    ReqRpcClient reqRpcClient;
 
     @Autowired
     Executor taskExecutor;
@@ -40,11 +40,16 @@ public class IdpInterceptor {
     public Object intercept(ProceedingJoinPoint pjp) throws Throwable {
         //获取header中的 全局唯一id
         String traceId = getHeaderTraceId();
-        log.info(">> idempotent intercept traceId {}", traceId);
+        //获取接口路径
+        String uri = getUri();
+        //获取参数
+        Object[] args = pjp.getArgs();
+        log.info(">> idempotent intercept traceId {} | uri:{} | args:{}", traceId,uri,args);
         Object res;
         try {
             //获取header中的 幂等服务id
-            MessageDto messageDtoValidate = rpcClient.request(MessageCreator.serverExcuting(traceId));
+            MessageDto messageDtoValidate = reqRpcClient.request(MessageCreator.serverExcuting(traceId,
+                    args,uri));
             log.info("excuting id response msg : {}", messageDtoValidate);
             if (messageDtoValidate.getState() == MessageConstants.STATE_OK) {
                 //执行业务
@@ -59,7 +64,7 @@ public class IdpInterceptor {
                     @Override
                     public void run() {
                         try {
-                            rpcClient.request(MessageCreator.serverSuccess(traceId));
+                            reqRpcClient.request(MessageCreator.serverSuccess(traceId));
                             log.info("业务执行成功，traceId：{}", traceId);
                         } catch (Exception ex) {
                             log.error("调用幂等服务失败，通知幂等服务该请求已成功结束！ error:{}", ex);
@@ -98,6 +103,19 @@ public class IdpInterceptor {
     /**
      * @return
      * @Author xuliang
+     * @Description //TODO 获取http header 头中的全局唯一id
+     * @Date 下午4:27 2020/4/22
+     * @Param
+     **/
+    private String getUri() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        return request.getRequestURI()+":"+request.getServletPath();
+    }
+
+
+    /**
+     * @return
+     * @Author xuliang
      * @Description //TODO 处理全局异常
      * @Date 下午4:23 2020/4/22
      * @Param cause
@@ -105,10 +123,10 @@ public class IdpInterceptor {
     public void onException(Throwable cause, String traceId) throws RpcException {
         try {
             if (RuntimeException.class.isAssignableFrom(cause.getClass())) {
-                MessageDto messageDtoRunExe = rpcClient.request(MessageCreator.serverBussinessRuntimeException(traceId));
+                MessageDto messageDtoRunExe = reqRpcClient.request(MessageCreator.serverBussinessRuntimeException(traceId));
                 log.info("runtime exception response msg:{}", messageDtoRunExe);
             } else if (Exception.class.isAssignableFrom(cause.getClass())) {
-                MessageDto messageDtoRunExe = rpcClient.request(MessageCreator.serverBussinessException(traceId));
+                MessageDto messageDtoRunExe = reqRpcClient.request(MessageCreator.serverBussinessException(traceId));
                 log.info("exception response msg:{}", messageDtoRunExe);
             } else {
                 // 不支持的异常处理

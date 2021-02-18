@@ -4,6 +4,7 @@ import com.tbex.idmpotent.netty.msg.dto.RpcCmd;
 import com.tbex.idmpotent.server.mq.MQProvider;
 import com.tbex.idmpotent.server.mq.MessageQueue;
 import com.tbex.idmpotent.server.server.IdmpotentServerHandler;
+import com.tbex.idmpotent.server.utils.ThreadPoolUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,9 @@ public class RpcMsgConsumer {
 
     public static final int threadCnt = Runtime.getRuntime().availableProcessors() * 2;
 
+    private ExecutorService bussiness_executors = ThreadPoolUtils.getInstance().getExecutorService();
     private final IdmpotentServerHandler rpcMsgHandler;
+
     private ExecutorService msgSenderExecutor;
 
     public RpcMsgConsumer(IdmpotentServerHandler rpcMsgHandler) {
@@ -35,10 +38,10 @@ public class RpcMsgConsumer {
     }
 
     public void start() {
-
         msgSenderExecutor = Executors.newFixedThreadPool(threadCnt);
 
         for (int i = 0; i < threadCnt; i++) {
+            //IO线程---处理上行消息吞吐量
             msgSenderExecutor.execute(new MQMsgConsumerWorker(i));
         }
     }
@@ -48,8 +51,11 @@ public class RpcMsgConsumer {
     }
 
     private void consumeNewMsg(RpcCmd msgWrapper) {
-        logger.info("处理消息 consumer msg : {}", msgWrapper);
-        rpcMsgHandler.callback(msgWrapper);
+        //业务线程---处理下行消息吞吐量
+        bussiness_executors.submit(()->{
+            logger.info("处理消息 consumer msg : {}", msgWrapper);
+            rpcMsgHandler.callback(msgWrapper);
+        });
     }
 
 

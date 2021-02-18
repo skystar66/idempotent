@@ -37,7 +37,7 @@ public class IdmpotentServerConfig {
     /**
      * zk path
      */
-    private String zkRoot;
+    private String zkPath;
 
     /**
      * zk address

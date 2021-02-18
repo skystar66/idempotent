@@ -1,7 +1,7 @@
 package com.tbex.idmpotent.client.client.callback;
 
 import com.tbex.idmpotent.client.client.MessageCreator;
-import com.tbex.idmpotent.client.client.RpcClient;
+import com.tbex.idmpotent.client.client.ReqRpcClient;
 import com.tbex.idmpotent.client.client.channel.NettyChannelManager;
 import com.tbex.idmpotent.client.client.token.TokenProvider;
 import com.tbex.idmpotent.client.utils.Constants;
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
 public class TCRpcConnectInitCallBack implements ClientInitCallBack {
 
     @Autowired
-    RpcClient rpcClient;
+    ReqRpcClient reqRpcClient;
 
 
     @Override
@@ -36,7 +36,7 @@ public class TCRpcConnectInitCallBack implements ClientInitCallBack {
             try {
                 log.info("Send login message to Login Idmpotent Server[{}]", remoteKey);
 
-                MessageDto messageDtoLogin = rpcClient.request(MessageCreator.serverLogin(Constants.USER_NAME,
+                MessageDto messageDtoLogin = reqRpcClient.request(MessageCreator.serverLogin(Constants.USER_NAME,
                         Constants.USER_PWD));
                 log.info("登录返回消息：{}", messageDtoLogin);
                 if (messageDtoLogin.getState() != MessageConstants.STATE_OK) {

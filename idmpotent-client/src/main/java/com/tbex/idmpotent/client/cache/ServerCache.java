@@ -2,7 +2,6 @@ package com.tbex.idmpotent.client.cache;
 
 import com.google.common.cache.LoadingCache;
 import com.tbex.idmpotent.client.kit.ZKit;
-import com.tbex.idmpotent.client.pool.ConnectionPoolFactory;
 import com.tbex.idmpotent.client.weight.ServerAdrWeight;
 import com.tbex.idmpotent.client.weight.ServerNode;
 import org.slf4j.Logger;
@@ -10,9 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Function: 服务器节点缓存

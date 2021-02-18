@@ -74,6 +74,34 @@ public class RpcClientInitializer implements DisposableBean {
     }
 
 
+    public ChannelFuture initFuture(String host, Integer port, boolean sync){
+        NettyContext.nettyType = NettyType.client;
+        NettyContext.params = host;
+        Optional<ChannelFuture> future = connect2(new InetSocketAddress(host, port));
+        log.info("Success Connect Idp Server Address : {}", host + ":" + port);
+        if (sync && future.isPresent()) {
+            try {
+                return future.get();
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        return null;
+    }
+
+
+    public synchronized Optional<ChannelFuture> connect2(SocketAddress socketAddress){
+        Bootstrap b = new Bootstrap();
+        b.group(workerGroup);
+        b.channel(NioSocketChannel.class);
+        b.option(ChannelOption.SO_KEEPALIVE, true);
+        b.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000);
+        b.handler(nettyRpcClientChannelInitializer);
+        return Optional.of(b.connect(socketAddress).syncUninterruptibly());
+    }
+
+
+
     public synchronized Optional<Future> connect(SocketAddress socketAddress) {
         for (int i = 0; i < 3; i++) {
             if (!socketChannelManager.contains(socketAddress.toString())) {

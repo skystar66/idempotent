@@ -62,12 +62,12 @@ public class MessageCreator {
      * @param action action
      * @return MessageDto
      */
-    public static MessageDto serverException(String action) {
-        MessageDto messageDto = new MessageDto();
-        messageDto.setCmd(action);
-        messageDto.setState(MessageConstants.STATE_EXCEPTION);
-        return messageDto;
-    }
+//    public static MessageDto serverException(String action) {
+//        MessageDto messageDto = new MessageDto();
+//        messageDto.setCmd(action);
+//        messageDto.setState(MessageConstants.STATE_EXCEPTION);
+//        return messageDto;
+//    }
 
 
 }

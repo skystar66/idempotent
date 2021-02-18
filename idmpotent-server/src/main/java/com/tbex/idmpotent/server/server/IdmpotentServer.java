@@ -1,9 +1,15 @@
 package com.tbex.idmpotent.server.server;
 
+import com.alibaba.fastjson.JSON;
 import com.tbex.idmpotent.netty.dto.ManagerProperties;
+import com.tbex.idmpotent.netty.node.NodeBuilder;
+import com.tbex.idmpotent.netty.node.NodeInfo;
 import com.tbex.idmpotent.netty.server.init.RpcServerInitializer;
 import com.tbex.idmpotent.server.config.IdmpotentServerConfig;
+import com.tbex.idmpotent.server.zookeeper.ZkHelp;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class IdmpotentServer implements Runnable {
 
 
@@ -16,24 +22,21 @@ public class IdmpotentServer implements Runnable {
         this.rpcServerInitializer = rpcServerInitializer;
     }
 
-
     @Override
     public void run() {
-
-//        // 1. 配置
-//        if (rpcConfig.getWaitTime() <= 5) {
-//            rpcConfig.setWaitTime(1000);
-//        }
-//        if (rpcConfig.getAttrDelayTime() < 0) {
-//            //网络延迟时间 8s
-//            rpcConfig.setAttrDelayTime(txManagerConfig.getDtxTime());
-//        }
-
         // 2. 初始化RPC Server
         ManagerProperties managerProperties = new ManagerProperties();
         managerProperties.setCheckTime(rpcConfig.getHeartTime());
         managerProperties.setRpcPort(rpcConfig.getPort());
         managerProperties.setRpcHost(rpcConfig.getHost());
         rpcServerInitializer.init(managerProperties);
+        //注册zookeeper
+        log.info("###### 是否注册zookeeper 长连接服务节点 isReg : 【{}】"
+                ,rpcConfig.isZkSwitch()?"是":"否");
+        if (rpcConfig.isZkSwitch()) {
+            NodeInfo nodeInfo =NodeBuilder.buildNode(rpcConfig.getHost(),rpcConfig.getPort());
+            /**注册zk服务节点*/
+            ZkHelp.getInstance().regInCluster(rpcConfig.getZkPath(), JSON.toJSONString(nodeInfo));
+        }
     }
 }

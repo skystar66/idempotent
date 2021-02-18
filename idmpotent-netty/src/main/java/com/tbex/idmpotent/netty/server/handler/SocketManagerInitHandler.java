@@ -40,7 +40,7 @@ public class SocketManagerInitHandler extends ChannelInboundHandlerAdapter {
 
     public SocketManagerInitHandler() {
         MessageDto messageDto = new MessageDto();
-        messageDto.setCmd(MessageConstants.ACTION_HEART_CHECK);
+//        messageDto.setCmd(MessageConstants.ACTION_HEART_CHECK);
         heartCmd = new RpcCmd();
         heartCmd.setMsg(messageDto);
         heartCmd.setKey(MessageConstants.ACTION_HEART_CHECK + SnowflakeIdWorker.getInstance().nextId());
