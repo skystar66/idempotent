@@ -8,7 +8,7 @@ public class RedisConstants {
 
 
     /**接口幂等校验过期时间：5分钟*/
-    public static final int default_request_time_out=5*60;
+    public static final int default_request_time_out=10;
 
 
     //设置幂等请求的幂等服务

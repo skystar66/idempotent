@@ -23,18 +23,16 @@ public class CommonValidate {
      * 防止重复提交！
      */
 
-    public void checkCommonValidate(Channel channel,RpcCmd rpcCmd) {
+    public boolean checkCommonValidate(RpcCmd rpcCmd) {
         String params = rpcCmd.getMsg().loadBean(String.class);
         String uri = rpcCmd.getMsg().getUri();
         String key = MD5.crypt(params+uri);
         if (fastStorage.exist(key)) {
-            channel.writeAndFlush(MessageCreator.bussinesError(rpcCmd, ResponseCode.ID_DUPLICATE));
-            return;
+            return true;
         }
         //todo 替换成本地缓存，减少redis 吞吐量
-
-
         fastStorage.setex(key, RedisConstants.default_request_time_out, rpcCmd.toString());
+        return false;
     }
 
 

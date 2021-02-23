@@ -1,6 +1,7 @@
 package com.tbex.idmpotent.server.core.process;
 
 import com.tbex.idmpotent.netty.msg.dto.RpcCmd;
+import com.tbex.idmpotent.netty.msg.enums.ResponseCode;
 import com.tbex.idmpotent.server.cache.GuavaCacheUtil;
 import com.tbex.idmpotent.server.config.IdmpotentServerConfig;
 import com.tbex.idmpotent.server.core.IdpChecker;
@@ -59,14 +60,20 @@ public class ExcutingProcess implements IdpChecker {
     public void process(Channel channel, RpcCmd rpcCmd) {
         try {
             //校验幂等
-            commonValidate.checkCommonValidate(channel, rpcCmd);
+            boolean validate = commonValidate.checkCommonValidate(rpcCmd);
+            if (validate) {
+                channel.writeAndFlush(MessageCreator.bussinesError(rpcCmd, ResponseCode.ID_DUPLICATE_PERIOD));
+                return;
+            }
             //校验该幂等id 是否是当前服务处理
             String id = rpcCmd.getMsg().getIdempotentId();
             //业务线类型
             String bussinessType = rpcCmd.getType();
             //获取幂等id 的 节点id
             String nodeId = id.substring(0, 2);
+            //获取幂等缓存key
             String cacheKey = CacheKeyUtil.getIdpKeyById(bussinessType, id);
+            //添加幂等状态
             Set<KeyState> keyStates = new HashSet<>();
             keyStates.add(KeyState.EXECUTING);
             if (nodeId.equals(idmpotentServerConfig.getNodeId())) {
