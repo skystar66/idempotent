@@ -28,9 +28,19 @@ public class RpcMsgConsumer {
 
     public static final int threadCnt = Runtime.getRuntime().availableProcessors() * 2;
 
+    /**
+     * 业务执行线程池---下行消息
+     */
     private ExecutorService bussiness_executors = ThreadPoolUtils.getInstance().getExecutorService();
+
+    /**
+     * 服务端处理handler
+     */
     private final IdmpotentServerHandler rpcMsgHandler;
 
+    /**
+     * 处理接收IO消息线程池---上行消息
+     */
     private ExecutorService msgSenderExecutor;
 
     public RpcMsgConsumer(IdmpotentServerHandler rpcMsgHandler) {
@@ -39,7 +49,6 @@ public class RpcMsgConsumer {
 
     public void start() {
         msgSenderExecutor = Executors.newFixedThreadPool(threadCnt);
-
         for (int i = 0; i < threadCnt; i++) {
             //IO线程---处理上行消息吞吐量
             msgSenderExecutor.execute(new MQMsgConsumerWorker(i));
@@ -52,7 +61,7 @@ public class RpcMsgConsumer {
 
     private void consumeNewMsg(RpcCmd msgWrapper) {
         //业务线程---处理下行消息吞吐量
-        bussiness_executors.submit(()->{
+        bussiness_executors.submit(() -> {
             logger.info("处理消息 consumer msg : {}", msgWrapper);
             rpcMsgHandler.callback(msgWrapper);
         });

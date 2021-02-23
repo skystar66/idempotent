@@ -47,7 +47,7 @@ public class IdmpotentServerHandler {
 
             /**新版本*/
             idmpotentManager.execute(channel,rpcCmd);
-
+            //todo 旧版处理
             /**旧版*/
 //            //具体业务处理
 //            EventType eventType = EventType.of(rpcCmd.getEvent());

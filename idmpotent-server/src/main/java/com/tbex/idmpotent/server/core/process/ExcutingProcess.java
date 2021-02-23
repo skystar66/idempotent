@@ -105,13 +105,5 @@ public class ExcutingProcess implements IdpChecker {
         } catch (Exception ex) {
             log.error("Executing  is error：{}", ex);
         }
-
-
-
     }
-
-
-
-
-
 }

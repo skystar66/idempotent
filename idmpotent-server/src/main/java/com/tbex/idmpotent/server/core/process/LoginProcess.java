@@ -26,7 +26,6 @@ public class LoginProcess implements IdpChecker {
 
     @Override
     public void process(Channel channel, RpcCmd rpcCmd) {
-
         handleLogin(channel, rpcCmd);
     }
 
@@ -36,7 +35,6 @@ public class LoginProcess implements IdpChecker {
     public void handleLogin(Channel channel, RpcCmd rpcCmd) {
         String token = TokenProvider.get();
         if (StringUtils.isEmpty(token)) {
-
             String userNameAndPwd = rpcCmd.getMsg().loadBean(String.class);
             String[] params = userNameAndPwd.split(":");
 

@@ -32,10 +32,7 @@ public class RpcServerAnswer implements RpcAnswer {
 
     @Override
     public void callback(RpcCmd rpcCmd) {
-
         //先走安全服务 token
-
-
         //添加到消息处理器中
         executorService.submit(() -> {
             MQProvider.push(rpcCmd);

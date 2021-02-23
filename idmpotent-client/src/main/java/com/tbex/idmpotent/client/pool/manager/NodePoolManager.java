@@ -108,6 +108,7 @@ public class NodePoolManager {
      */
     public RpcClient chooseRpcClient() {
         try {
+            //todo 内存级别锁，不会影响效率,IO 不建议这样做
             lock.readLock().lock();
             String  channelKey = RpcLoadBalance.getInstance().chooseNodeChannel();
             if (StringUtils.isEmpty(channelKey)) {
@@ -128,6 +129,7 @@ public class NodePoolManager {
      */
     public RpcClient chooseRpcClient(String key) {
         try {
+            //todo 内存级别锁，不会影响效率,IO 不建议这样做
             lock.readLock().lock();
             String  channelKey = RpcLoadBalance.getInstance().chooseNodeChannel();
             if (StringUtils.isEmpty(channelKey)) {

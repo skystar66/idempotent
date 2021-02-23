@@ -60,14 +60,21 @@ public class ServiceProcessInitializer {
      */
     @PostConstruct
     private void init() {
+
+        /**业务执行中处理 process*/
     	getInstance().serviceProcessMap.put(EventType.EXECUTING, excutingProcess);
+        /**业务处理成功 process*/
     	getInstance().serviceProcessMap.put(EventType.BUSSINESS_SUCCESS, successProcess);
+        /**业务程序性异常处理 process*/
     	getInstance().serviceProcessMap.put(EventType.BUSSINESS_RUNTIMEEXCEPTION_FAIL, bussinessErrorProcess);
+        /**业务非程序性异常处理 process*/
     	getInstance().serviceProcessMap.put(EventType.BUSSINESS_FAIL, exceptionProcess);
 
-
+        /**登录处理 process*/
         getInstance().serviceProcessMap.put(EventType.LOGIN, loginProcess);
+        /**登出处理 process*/
         getInstance().serviceProcessMap.put(EventType.LOGOUT, loginOutProcess);
+        /**创建幂等id处理 process*/
         getInstance().serviceProcessMap.put(EventType.CREATE_ID, createIdProcess);
 
 

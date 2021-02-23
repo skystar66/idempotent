@@ -82,7 +82,6 @@ public class BussinessErrorProcess implements IdpChecker {
                         if (!checkResult) {
                             return;
                         }
-
                         idpKey = IDKeyGenUtil.newBussinessException(idpKey.getId());
                         //更新本地缓存
                         GuavaCacheUtil.put(cacheKey, idpKey);

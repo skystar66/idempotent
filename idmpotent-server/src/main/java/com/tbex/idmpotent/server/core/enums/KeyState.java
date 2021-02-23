@@ -16,11 +16,11 @@ public enum KeyState {
     EXECUTING(2),
 
     /**
-     * 程序异常，不允许重试
+     * 非程序性异常，不允许重试
      */
     EXCEPTION(3),
     /**
-     * 业务执行失败，允许重试
+     * 业务执行失败，程序性异常，允许重试
      */
     BUSSINESS_EXCEPTION(4);
 

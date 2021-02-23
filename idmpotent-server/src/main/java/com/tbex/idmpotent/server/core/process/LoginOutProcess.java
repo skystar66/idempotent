@@ -31,7 +31,6 @@ public class LoginOutProcess implements IdpChecker {
         handleLogout(channel, rpcCmd);
     }
 
-
     /**
      * 用户退出登录
      */

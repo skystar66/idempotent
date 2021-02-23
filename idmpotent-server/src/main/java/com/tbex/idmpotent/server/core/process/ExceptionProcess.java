@@ -33,8 +33,6 @@ import static com.tbex.idmpotent.server.utils.MySeqIdGen.default_seq_prefix;
 @Slf4j
 public class ExceptionProcess implements IdpChecker {
 
-
-
     @Autowired
     IdmpotentServerConfig idmpotentServerConfig;
 

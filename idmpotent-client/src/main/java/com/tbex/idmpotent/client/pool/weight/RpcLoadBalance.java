@@ -75,7 +75,7 @@ public class RpcLoadBalance {
      * 根据节点获取随机节点channelKey
      */
     public String getChannelKey(String node) {
-        List<String> channelKeys = NodePoolCache.getAllNodeRpcSrvListByNode(node);
+        CopyOnWriteArrayList<String> channelKeys = NodePoolCache.getAllNodeRpcSrvListByNode(node);
         if (CollectionUtils.isEmpty(channelKeys)) {
             /**很有可能当前节点服务全部挂掉*/
             throw new RuntimeException("######### 当前节点 node：" + node + " 服务不可用！！！");
