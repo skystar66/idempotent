@@ -19,3 +19,4 @@ topic:
     node: 00
     periodTime: 10
     countnum: 12
+    zkPath: /idp/server

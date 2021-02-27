@@ -18,7 +18,7 @@ public enum KeyState {
     /**
      * 非程序性异常，不允许重试
      */
-    EXCEPTION(3),
+    ERROR(3),
     /**
      * 业务执行失败，程序性异常，允许重试
      */

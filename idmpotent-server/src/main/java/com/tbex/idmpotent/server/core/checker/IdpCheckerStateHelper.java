@@ -68,7 +68,7 @@ public class IdpCheckerStateHelper {
                     //幂等处理成功,直接返回调用端
                     channel.writeAndFlush(MessageCreator.bussinesError(rpcCmd, ID_SUCCESS));
                     return;
-                } else if (idpKey.getKeyState() == KeyState.EXCEPTION) {
+                } else if (idpKey.getKeyState() == KeyState.ERROR) {
                     //该幂等 上次请求出现程序异常，此次不让处理 ，直接返回失败
                     channel.writeAndFlush(MessageCreator.bussinesError(rpcCmd, ID_DUPLICATE));
                     return;
@@ -102,7 +102,7 @@ public class IdpCheckerStateHelper {
                 if (idpKey.getKeyState() == KeyState.SUCCESS) {
                     //幂等处理成功,直接返回调用端
                     return MessageCreator.bussinesError(rpcCmd, ID_SUCCESS);
-                } else if (idpKey.getKeyState() == KeyState.EXCEPTION) {
+                } else if (idpKey.getKeyState() == KeyState.ERROR) {
                     //该幂等 上次请求出现程序异常，此次不让处理 ，直接返回失败
                     return MessageCreator.bussinesError(rpcCmd, ID_DUPLICATE);
                 } else if (idpKey.getKeyState() == KeyState.BUSSINESS_EXCEPTION) {

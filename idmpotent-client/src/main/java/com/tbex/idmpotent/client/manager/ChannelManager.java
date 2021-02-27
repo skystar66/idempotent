@@ -1,6 +1,7 @@
 package com.tbex.idmpotent.client.manager;
 
 import com.tbex.idmpotent.client.client.channel.NettyChannelManager;
+import com.tbex.idmpotent.client.pool.ConnectionPoolFactory;
 import com.tbex.idmpotent.netty.msg.manager.SocketChannelManager;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -61,7 +61,7 @@ public class ExceptionProcess implements IdpChecker {
             String nodeId = id.substring(0, 2);
             String cacheKey = CacheKeyUtil.getIdpKeyById(bussinessType, id);
             Set<KeyState> keyStates = new HashSet<>();
-            keyStates.add(KeyState.EXCEPTION);
+            keyStates.add(KeyState.ERROR);
             if (nodeId.equals(idmpotentServerConfig.getNodeId())) {
                 //获取id生成时间
                 String timestamp = id.substring((default_seq_prefix + MySeqIdGen.node).length() - 1, id.length() - idmpotentServerConfig.getCountnum());
