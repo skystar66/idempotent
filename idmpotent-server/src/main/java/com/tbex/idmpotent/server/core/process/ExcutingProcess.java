@@ -81,7 +81,7 @@ public class ExcutingProcess implements IdpChecker {
                 String timestamp = id.substring((default_seq_prefix + MySeqIdGen.node).length() - 1, id.length() - idmpotentServerConfig.getCountnum());
                 //校验该时间是否在10分钟内,这里减1  主要为啦 解决时间边界问题
                 /**10分钟概念：正常来说 每个请求的耗时 不会超过10分钟，所以设置10分钟的含义在于，1，减轻redis压力，例如：一个请求在1s
-                 * 就已经处理完啦，此时本地缓存已经清除掉啦，这时就需要查询redis 来获取数据 进行校验判断，但是这个查询redis 是个无用的查询，拜拜增加啦啊redis的压力，如果本地缓存失效，
+                 * 就已经处理完啦，此时本地缓存已经清除掉啦，这时就需要查询redis 来获取数据 进行校验判断，但是这个查询redis 是个无用的查询，白白增加啦啊redis的压力，如果本地缓存失效，
                  * 就证明该请求已经成功处理完毕，不需要再查询redis。*/
                 if (DateUtil.timeDifferenceMinutes(Long.valueOf(timestamp)) < idmpotentServerConfig.getPeriodTime() - 1) {
                     //获取本地缓存
