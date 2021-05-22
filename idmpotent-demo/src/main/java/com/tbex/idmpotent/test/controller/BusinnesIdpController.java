@@ -50,50 +50,5 @@ public class BusinnesIdpController {
         System.out.println("处理业务");
         return "hello";
     }
-//
-//    @RequestMapping("/spanId")
-//    public String spanId(@RequestParam("traceId") String traceId) throws InterruptedException {
-//        System.out.println(">> 请求处理中...");
-//
-//        Thread.sleep(1000);
-//        boolean isflag = false;
-//        try {
-//            isflag = bussinessInterceptor.intercept(traceId);
-//
-//        } catch (Throwable throwable) {
-//
-//        }
-//        System.out.println("<< 请求处理完毕...");
-//        return String.valueOf(isflag);
-//    }
-//
-//    @RequestMapping("/throwEx")
-//    public String throwEx(@RequestParam("traceId") String traceId) throws Exception {
-//        System.out.println(">> 请求处理中...");
-//        try {
-//            boolean isflag = bussinessInterceptor.intercept(traceId);
-//
-//            log.info("throw exception :{}", isflag);
-//        } catch (Throwable throwable) {
-//
-//        }
-//
-//        throw new Exception("故意抛出的Exception");
-//    }
-//
-//    @RequestMapping("/throwRuntimeEx")
-//    public String throwRuntimeEx(@RequestParam("traceId") String traceId) {
-//        System.out.println(">> 请求处理中...");
-//        try {
-//            boolean isflag = bussinessInterceptor.intercept(traceId);
-//
-//            log.info("throw runntime exception :{}", isflag);
-//
-//        } catch (Throwable throwable) {
-//
-//        }
-//
-//        throw new RuntimeException("故意抛出的RuntimeException");
-//    }
 
 }

@@ -47,10 +47,10 @@ public class IdpInterceptor {
         log.info(">> idempotent intercept traceId {} | uri:{} | args:{}", traceId,uri,args);
         Object res;
         try {
-            //获取header中的 幂等服务id
+            /**发起状态为正在运行的请求*/
             MessageDto messageDtoValidate = reqRpcClient.request(MessageCreator.serverExcuting(traceId,
                     args,uri));
-            log.info("excuting id response msg : {}", messageDtoValidate);
+            log.info("traceId:{} Excuting response msg : {}",traceId, messageDtoValidate);
             if (messageDtoValidate.getState() == MessageConstants.STATE_OK) {
                 //执行业务
                 res = pjp.proceed();
@@ -59,11 +59,12 @@ public class IdpInterceptor {
                 throw new RejectException(Msgs.IDP_EXCEPTION, messageDtoValidate.loadBean(String.class));
             }
             if (res != null) {
-                //执行成功后 通知 幂等服务端处理，此处可使用线程池处理，防止幂等端掉不通情况
+                //执行成功后 通知 幂等服务端处理，此处可使用线程池处理，提升服务的吞吐量
                 taskExecutor.execute(new Runnable() {
                     @Override
                     public void run() {
                         try {
+                            //此处可考虑增加重试机制,使用google的retry
                             reqRpcClient.request(MessageCreator.serverSuccess(traceId));
                             log.info("业务执行成功，traceId：{}", traceId);
                         } catch (Exception ex) {
@@ -83,7 +84,7 @@ public class IdpInterceptor {
             onException(cause, traceId);
             throw cause;
         }
-        log.info("<< idempotent intercept traceId {}", traceId);
+        log.info("<< idempotent intercept end traceId {}", traceId);
         return res;
     }
 

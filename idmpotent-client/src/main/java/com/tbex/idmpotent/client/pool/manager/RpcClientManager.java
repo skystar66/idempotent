@@ -5,10 +5,10 @@ import com.tbex.idmpotent.client.pool.RpcClient;
 import com.tbex.idmpotent.client.pool.connect.ConnectionCache;
 import com.tbex.idmpotent.client.pool.connect.NodePoolCache;
 import com.tbex.idmpotent.client.utils.RPCConstants;
+import com.tbex.idmpotent.client.utils.SpringUtil;
 import com.tbex.idmpotent.netty.client.init.RpcClientInitializer;
 import com.tbex.idmpotent.netty.node.NodeInfo;
 import com.tbex.idmpotent.netty.util.AddressUtils;
-import com.tbex.idmpotent.server.utils.SpringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

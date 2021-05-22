@@ -1,6 +1,5 @@
 package com.tbex.idmpotent.test.keyprovider;
 
-import com.tbex.idmpotent.client.keyprovider.KeyGenException;
 import com.tbex.idmpotent.client.keyprovider.KeyProvider;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -22,7 +21,7 @@ public class SpanIdKeyProvider implements KeyProvider {
   }
 
   @Override
-  public String get() throws KeyGenException {
+  public String get(){
     return spanIdPool.get();
   }
 }

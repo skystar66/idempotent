@@ -16,7 +16,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {"com.tbex.*"})
-public class IdmpotentClientApplication implements ApplicationRunner, DisposableBean {
+public class IdmpotentClientApplication implements ApplicationRunner {
 
 
     @Autowired
@@ -25,10 +25,6 @@ public class IdmpotentClientApplication implements ApplicationRunner, Disposable
     @Autowired
     IdmpotentServerConfig idmpotentServerConfig;
 
-    RpcMsgConsumer rpcMsgConsumer;
-
-    @Autowired
-    IdmpotentServerHandler idmpotentServerHandler;
 
     public static void main(String[] args) {
         SpringApplication.run(IdmpotentClientApplication.class, args);
@@ -42,14 +38,7 @@ public class IdmpotentClientApplication implements ApplicationRunner, Disposable
         ClusterCenter.getInstance().listenerServerRpc();
         /**监控连接池队列*/
         ConnectQueueMonitor.getInstance().start();
-        /**启动消费IO消息线程*/
-        rpcMsgConsumer = new RpcMsgConsumer(idmpotentServerHandler);
-        rpcMsgConsumer.start();
     }
 
-    @Override
-    public void destroy() throws Exception {
-        rpcMsgConsumer.stop();
-    }
 }
 
