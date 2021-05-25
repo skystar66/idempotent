@@ -38,7 +38,7 @@ public class IdpInterceptor {
     Executor taskExecutor;
 
     public Object intercept(ProceedingJoinPoint pjp) throws Throwable {
-        //获取header中的 全局唯一id
+        //获取header中的 全局唯一id，幂等ID
         String traceId = getHeaderTraceId();
         //获取接口路径
         String uri = getUri();

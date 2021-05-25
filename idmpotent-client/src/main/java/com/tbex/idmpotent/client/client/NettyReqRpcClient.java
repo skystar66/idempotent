@@ -1,9 +1,11 @@
 package com.tbex.idmpotent.client.client;
 
+import com.tbex.idmpotent.client.consistentHash.HashCircle;
 import com.tbex.idmpotent.client.enums.RpcResponseState;
 import com.tbex.idmpotent.client.pool.RpcClient;
 import com.tbex.idmpotent.client.pool.manager.NodePoolManager;
 import com.tbex.idmpotent.client.pool.weight.RpcLoadBalance;
+import com.tbex.idmpotent.client.utils.RPCConstants;
 import com.tbex.idmpotent.netty.content.RpcCmdContext;
 import com.tbex.idmpotent.netty.content.RpcContent;
 import com.tbex.idmpotent.netty.msg.dto.MessageDto;
@@ -56,8 +58,12 @@ public class NettyReqRpcClient extends ReqRpcClient {
 
     private MessageDto request0(RpcContent rpcContent, RpcCmd rpcCmd, long timeout) throws Exception {
         log.info("get channel, key:{}", rpcCmd.getKey());
+        //幂等ID
+        String idpID=rpcCmd.getMsg().getIdempotentId();
         //todo 取模获取对应的节点ip
-        RpcClient rpcClient = NodePoolManager.getInstance().chooseRpcClient();
+        //根据幂等ID hashCircle 取模获取
+        String node = HashCircle.getInstance().get(RPCConstants.DEFAULT_IDP_SERVER,idpID);
+        RpcClient rpcClient = NodePoolManager.getInstance().chooseRpcClient(node);
         rpcClient.sendMsg(rpcCmd);
         log.info("await response key : {}", rpcCmd.getKey());
         //阻塞结果

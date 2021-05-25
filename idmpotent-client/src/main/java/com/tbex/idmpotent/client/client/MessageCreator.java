@@ -104,6 +104,7 @@ public class MessageCreator {
         messageDto.setState(MessageConstants.STATE_OK);
         messageDto.setUri(uri);
         messageDto.setData(args);
+        messageDto.setIdempotentId(traceId);//幂等ID
         rpcCmd.setMsg(messageDto);
         rpcCmd.setEvent(EventType.EXECUTING.name());
         rpcCmd.setToken(TokenProvider.get());
@@ -142,6 +143,7 @@ public class MessageCreator {
                 SnowflakeIdWorker.getInstance().nextId());
         MessageDto messageDto = new MessageDto();
         messageDto.setTraceID(traceId);
+        messageDto.setIdempotentId(traceId);//幂等ID
         messageDto.setState(MessageConstants.STATE_OK);
         rpcCmd.setMsg(messageDto);
         rpcCmd.setEvent(EventType.BUSSINESS_SUCCESS.name());
@@ -162,6 +164,7 @@ public class MessageCreator {
                 SnowflakeIdWorker.getInstance().nextId());
         MessageDto messageDto = new MessageDto();
         messageDto.setTraceID(traceId);
+        messageDto.setIdempotentId(traceId);//幂等ID
         messageDto.setState(MessageConstants.STATE_OK);
         rpcCmd.setMsg(messageDto);
         rpcCmd.setEvent(EventType.BUSSINESS_FAIL.name());
@@ -181,6 +184,7 @@ public class MessageCreator {
                 SnowflakeIdWorker.getInstance().nextId());
         MessageDto messageDto = new MessageDto();
         messageDto.setTraceID(traceId);
+        messageDto.setIdempotentId(traceId);//幂等ID
         messageDto.setState(MessageConstants.STATE_OK);
         rpcCmd.setMsg(messageDto);
         rpcCmd.setEvent(EventType.BUSSINESS_RUNTIMEEXCEPTION_FAIL.name());

@@ -3,16 +3,18 @@ package com.tbex.idmpotent.client.cluster;
 import com.alibaba.fastjson.JSON;
 import com.github.zkclient.IZkChildListener;
 import com.github.zkclient.IZkDataListener;
+import com.tbex.idmpotent.client.consistentHash.HashCircle;
 import com.tbex.idmpotent.client.pool.manager.NodePoolManager;
 import com.tbex.idmpotent.client.utils.RPCConstants;
 import com.tbex.idmpotent.netty.node.NodeInfo;
-import com.tbex.idmpotent.server.zookeeper.ZkHelp;
+import com.tbex.idmpotent.netty.zookeeper.ZkHelp;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Zk Cluster管理
@@ -70,6 +72,8 @@ public class ClusterCenter {
                         log.error("onNodeDataChange.parseObject", e);
                     }
                 }
+                /**添加到hash circle环中*/
+                HashCircle.getInstance().init(RPCConstants.DEFAULT_IDP_SERVER, currentChildren.stream().collect(Collectors.joining(",")));
                 NodePoolManager.getInstance().onNodeChange(nodeInfos);
             }
         };

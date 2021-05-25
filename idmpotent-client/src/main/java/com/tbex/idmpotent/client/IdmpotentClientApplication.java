@@ -4,10 +4,6 @@ import com.tbex.idmpotent.client.cluster.ClusterCenter;
 import com.tbex.idmpotent.client.pool.manager.NodePoolManager;
 import com.tbex.idmpotent.client.pool.monitor.ConnectQueueMonitor;
 import com.tbex.idmpotent.netty.server.init.RpcServerInitializer;
-import com.tbex.idmpotent.server.config.IdmpotentServerConfig;
-import com.tbex.idmpotent.server.consumer.RpcMsgConsumer;
-import com.tbex.idmpotent.server.server.IdmpotentServer;
-import com.tbex.idmpotent.server.server.IdmpotentServerHandler;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -21,9 +17,6 @@ public class IdmpotentClientApplication implements ApplicationRunner {
 
     @Autowired
     RpcServerInitializer rpcServerInitializer;
-
-    @Autowired
-    IdmpotentServerConfig idmpotentServerConfig;
 
 
     public static void main(String[] args) {
