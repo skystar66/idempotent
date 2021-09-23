@@ -43,7 +43,7 @@ public class IdmpotentStoreService {
     public void asyncSaveCacheAndDB(String id, Set<KeyState> keyStates) {
         saveStore.submit(() -> {
             try {
-                Pair pair = idKeyStore.putIfAbsentOrInStates(IDKeyGenUtil.newExecuting(id), keyStates);
+                Pair pair = idKeyStore.putIfAbsentOrInStates(IDKeyGenUtil.newInit(id), keyStates);
                 /**此处使用乐观锁 类似于 CAS操作*/
                 if (pair.getIdpKey().getKeyState() == KeyState.EXECUTING && pair.getCount() == 1) {
                     log.info("save redis 数据成功！ id:{}", id);

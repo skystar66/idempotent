@@ -27,6 +27,7 @@ public enum ResponseCode {
     ID_DUPLICATE("10011", "幂等性拦截！重复请求"),
     ID_SUCCESS("10012", "幂等性拦截！处理成功"),
     ID_NOT_EXIST("10013", "幂等性拦截！id不存在"),
+    ID_INVALID("10015", "幂等性拦截！id失效，重新获取"),
 
     ID_DUPLICATE_PERIOD("10014", "幂等性拦截！手速太快啦，休息一下，稍后再试！"),
 

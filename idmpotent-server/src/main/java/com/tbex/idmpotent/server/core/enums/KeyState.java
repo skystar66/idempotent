@@ -7,6 +7,11 @@ public enum KeyState {
 
 
     /**
+     * 初始化
+     */
+    INIT(0),
+
+    /**
      * 成功
      */
     SUCCESS(1),

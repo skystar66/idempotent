@@ -4,9 +4,12 @@ local KEY_PREFIX = 'idp-'
 local newKJson = ARGV[1]
 local statesJson = ARGV[2]
 local expire_seconds = ARGV[3]
+
 redis.log(redis.LOG_DEBUG,tostring(newKJson))
 redis.log(redis.LOG_DEBUG,tostring(statesJson))
 redis.log(redis.LOG_DEBUG,tostring(expire_seconds))
+
+
 local newK = cjson.decode(newKJson)
 local states = cjson.decode(statesJson)
 
@@ -29,12 +32,12 @@ for i, state in ipairs(states) do
 end
 local oldK = cjson.decode(oldKJson)
 if (existsState) then
-    -- 存在且状态包含在states中 then
+    -- 存在且  状态包含在states中 then
     redis.call("set", KEY_PREFIX .. newK.id, newKJson, "EX", expire_seconds)
     res['idpKey'] = oldK
     res['count'] = 1
 else
-    -- 存在且状态不包含在目标集合内
+    -- 存在且  状态不包含在目标集合内
     res['idpKey'] = oldK
     res['count'] = 0
 end

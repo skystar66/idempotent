@@ -42,8 +42,20 @@ public class IDKeyGenUtil {
         }
     }
 
+
     /**
      * 幂等服务初始化
+     */
+    public static IdpKey newInit(String id) {
+        return new IdpKey()
+                .setId(id)
+                .setCreatedTime(new Date())
+                .setKeyState(KeyState.INIT);
+
+    }
+
+    /**
+     * 幂等服务执行中
      */
     public static IdpKey newExecuting(String id) {
         return new IdpKey()
@@ -68,11 +80,11 @@ public class IDKeyGenUtil {
     /**
      * 程序异常
      */
-    public static IdpKey newException(String id) {
+    public static IdpKey newError(String id) {
         return new IdpKey()
                 .setId(id)
                 .setCreatedTime(new Date())
-                .setKeyState(KeyState.EXECUTING);
+                .setKeyState(KeyState.ERROR);
 
     }
 

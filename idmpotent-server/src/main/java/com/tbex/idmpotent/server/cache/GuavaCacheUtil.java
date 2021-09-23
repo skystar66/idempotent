@@ -25,11 +25,11 @@ public class GuavaCacheUtil {
     /**
      * 缓存项最大数量
      */
-    private static final long GUAVA_CACHE_SIZE = 100000;
+    public static final long GUAVA_CACHE_SIZE = 100000;
     /**
      * 缓存时间：分钟
      */
-    private static final long GUAVA_CACHE_TIME = 10;
+    public static final long GUAVA_CACHE_TIME = 10;
 
     /**
      * 并发级别 通常为cpu core pool size
